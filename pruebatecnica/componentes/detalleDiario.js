@@ -26,7 +26,17 @@ function DetalleDiario(props) {
     const fecha = props.fecha;
     const tipoIndicador = props.tipoIndicador;
 
-    const url = 'https://mindicador.cl/api/uf/05-01-2022';
+    const formatoFecha = fecha => {
+      let date = new Date(fecha);
+
+      let day = `${date.getDate()}`.padStart(2, '0');
+      let month = `${date.getMonth() + 1}`.padStart(2, '0');
+      let year = date.getFullYear();
+
+      return `${day}-${month}-${year}`;
+    };
+
+    const url = 'https://mindicador.cl/api/' + tipoIndicador + '/05-01-2022';
 
     axios
       .get(url)
@@ -38,13 +48,7 @@ function DetalleDiario(props) {
         setUnidadMedida(response.data.unidad_medida);
         setNombre(response.data.nombre);
 
-        let date = new Date(dato[0].fecha);
-
-        let day = `${date.getDate()}`.padStart(2, '0');
-        let month = `${date.getMonth() + 1}`.padStart(2, '0');
-        let year = date.getFullYear();
-
-        setFecha(`${day}-${month}-${year}`);
+        setFecha(formatoFecha(dato[0].fecha));
 
         setValor(dato[0].valor);
       })

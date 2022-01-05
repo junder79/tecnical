@@ -18,6 +18,15 @@ function DetalleDiario(props) {
   const [data, setData] = useState('');
   const [tipoIndicador, setTipoIndicador] = useState('');
   const navigation = useNavigation();
+  const formatoFecha = fecha => {
+    let date = new Date(fecha);
+
+    let day = `${date.getDate()}`.padStart(2, '0');
+    let month = `${date.getMonth() + 1}`.padStart(2, '0');
+    let year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
 
   const getHistorial = () => {
     const tipoIndicador = props.tipoIndicador;
@@ -37,8 +46,8 @@ function DetalleDiario(props) {
   const renderItem = ({item}) => (
     <View>
       <List.Item
-        title={item.fecha}
-        description={item.valor}
+        title={formatoFecha(item.fecha)}
+        description={'$ ' + item.valor}
         left={props => <List.Icon {...props} icon="folder" />}
       />
     </View>
