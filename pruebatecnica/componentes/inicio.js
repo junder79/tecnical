@@ -9,18 +9,18 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {List, Button} from 'react-native-paper';
-
+import {useNavigation} from '@react-navigation/native';
 const Item = ({title}) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
 );
 
-function App() {
+function App({screenName}) {
   useEffect(() => {
     getData();
   }, []);
-
+  const navigation = useNavigation();
   const [dataCars, setDataCars] = useState('');
   const getData = () => {
     var url = 'https://mindicador.cl/api/';
@@ -47,8 +47,14 @@ function App() {
       <Button
         icon="camera"
         mode="contained"
-        onPress={() => console.log('Pressed')}>
-        Detalle
+        onPress={() =>
+          navigation.navigate('Details', {
+            itemId: 86,
+            otherParam: item.unidad_medida,
+            tipo: item.codigo,
+          })
+        }>
+        HISTORIAL
       </Button>
     </View>
   );
