@@ -20,7 +20,6 @@ function HistorialScreen({route, navigation}) {
   const {tipo} = route.params;
   return (
     <View style={{flex: 1}}>
-      <Text>Details Screen {tipo}</Text>
       <Historial tipoIndicador={tipo}></Historial>
     </View>
   );
@@ -31,7 +30,6 @@ function DetalleDiarioScreen({route, navigation}) {
 
   return (
     <View style={{flex: 1}}>
-      <Text>Detalle Diario</Text>
       <DetalleDiario
         fecha={fecha}
         tipoIndicador={tipoIndicador}></DetalleDiario>
@@ -45,8 +43,8 @@ function HomeApp() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Inicio} />
-        <Stack.Screen name="Details" component={HistorialScreen} />
+        <Stack.Screen name="Inicio" component={Inicio} />
+        <Stack.Screen name="Historial" component={HistorialScreen} />
         <Stack.Screen name="Detalle" component={DetalleDiarioScreen} />
       </Stack.Navigator>
     </NavigationContainer>

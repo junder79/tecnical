@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import axios from 'axios';
-import {List, Button} from 'react-native-paper';
+import {List, Button, Card, Title, Paragraph} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 function DetalleDiario(props) {
   useEffect(() => {
@@ -16,43 +16,70 @@ function DetalleDiario(props) {
   }, []);
 
   const [data, setData] = useState('');
-
+  const [getIndicador, setTipoIndicador] = useState('');
+  const [unidadMedida, setUnidadMedida] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [fecha, setFecha] = useState('');
+  const [valor, setValor] = useState('');
   const getDetalle = () => {
     /* const fechaConsultada = props.fechaConsultada; */
     const fecha = props.fecha;
     const tipoIndicador = props.tipoIndicador;
-    alert('FECHA ' + fecha + 'INDICADOR ' + tipoIndicador);
-    const url = 'https://mindicador.cl/api/' + tipoIndicador + '/' + fecha;
+
+    const url = 'https://mindicador.cl/api/uf/05-01-2022';
 
     axios
       .get(url)
       .then(response => {
-        // alert(JSON.stringify(response.data.serie));
-        // setData(response.data.serie);
+        const dato = Object.values(response.data.serie);
+
+        setData(response.data.serie);
+        setTipoIndicador(tipoIndicador);
+        setUnidadMedida(response.data.unidad_medida);
+        setNombre(response.data.nombre);
+
+        let date = new Date(dato[0].fecha);
+
+        let day = `${date.getDate()}`.padStart(2, '0');
+        let month = `${date.getMonth() + 1}`.padStart(2, '0');
+        let year = date.getFullYear();
+
+        setFecha(`${day}-${month}-${year}`);
+
+        setValor(dato[0].valor);
       })
       .catch(e => {
-        // alert('error' + e);
+        alert('error' + e);
       });
   };
 
-  const dato = Object.values(data);
-  const renderItem = ({item}) => (
-    <View>
+  return (
+    <>
+      <Title>{getIndicador}</Title>
+      <Title>${valor}</Title>
       <List.Item
-        title={item.fecha}
-        description={item.valor}
+        title="Nombre"
+        description={nombre}
         left={props => <List.Icon {...props} icon="folder" />}
       />
-    </View>
-  );
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={dato}
-        renderItem={renderItem}
-        keyExtractor={item => item.valor}
+      <List.Item
+        title="Fecha"
+        description={fecha}
+        left={props => <List.Icon {...props} icon="folder" />}
       />
-    </SafeAreaView>
+      <List.Item
+        title="Unidad de Medida"
+        description={unidadMedida}
+        left={props => <List.Icon {...props} icon="folder" />}
+      />
+      <Card>
+        <Card.Cover
+          source={{
+            uri: 'https://i.picsum.photos/id/136/700/700.jpg?hmac=TlmOl6xjAbS_l42wp9lPaC92c3sheMj-tmnmz-8Jk0c',
+          }}
+        />
+      </Card>
+    </>
   );
 }
 const styles = StyleSheet.create({

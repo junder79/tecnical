@@ -25,7 +25,6 @@ function DetalleDiario(props) {
     axios
       .get(url)
       .then(response => {
-        // alert(JSON.stringify(response.data.serie));
         setData(response.data.serie);
         setTipoIndicador(response.data.codigo);
       })
@@ -42,17 +41,6 @@ function DetalleDiario(props) {
         description={item.valor}
         left={props => <List.Icon {...props} icon="folder" />}
       />
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() =>
-          navigation.navigate('Detalle', {
-            fecha: item.fecha,
-            tipoIndicador: tipoIndicador,
-          })
-        }>
-        DETALLE
-      </Button>
     </View>
   );
   return (
