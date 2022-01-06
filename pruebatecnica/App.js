@@ -7,7 +7,7 @@ import Historial from './componentes/historial';
 import DetalleDiario from './componentes/detalleDiario';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 function Inicio({navigation, screenName}) {
   return (
     <PaperProvider>
