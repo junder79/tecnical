@@ -82,9 +82,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  title: {
-    fontSize: 32,
-  },
 });
 
 export default DetalleDiario;

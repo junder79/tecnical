@@ -131,9 +131,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  title: {
-    fontSize: 32,
-  },
+
   cardEstilo: {
     borderRadius: 20,
     backgroundColor: '#73C6DD',
