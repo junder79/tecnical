@@ -8,4 +8,6 @@ React Native Paper
 
 # INSTALACIÓN
 
-Usar terminal en la carpeta raiz del proyecto y correr "npm install", acá se instalar todas las dependecias
+Usar terminal en la carpeta raiz del proyecto y correr "npm install", acá se instalarán todas las dependecias
+
+# EMULAR EN ANDROID
